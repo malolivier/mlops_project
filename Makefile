@@ -35,7 +35,12 @@ train: prepare
 	@echo "--- Lancement de l'entraînement des modèles ---"
 	$(UV) run python -m mlops.train
 
-# 7. Démarrage du serveur MLflow UI (Ajout MLOps)
+# 7. Analyse SHAP (Mission 3)
+explain: prepare
+	@echo "--- Génération des explications SHAP ---"
+	$(UV) run python -m mlops.explain
+
+# 8. Démarrage du serveur MLflow UI (Ajout MLOps)
 mlflow-ui:
 	@echo "--- Démarrage du serveur MLflow sur http://127.0.0.1:5000 ---"
 	$(UV) run mlflow ui --backend-store-uri sqlite:///$(MLFLOW_DB)
