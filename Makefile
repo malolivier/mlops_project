@@ -2,7 +2,7 @@
 UV = uv
 MLFLOW_DB = mlflow.db
 
-.PHONY: install format lint test prepare train mlflow-ui all clean
+.PHONY: install format lint test prepare train mlflow-ui api ui all clean
 
 # 1. Installation et synchronisation des dépendances
 install:
@@ -44,6 +44,16 @@ explain: prepare
 mlflow-ui:
 	@echo "--- Démarrage du serveur MLflow sur http://127.0.0.1:5000 ---"
 	$(UV) run mlflow ui --backend-store-uri sqlite:///$(MLFLOW_DB)
+
+# 8. API de prédiction FastAPI (Mission 4)
+api:
+	@echo "--- Démarrage de l'API FastAPI sur http://127.0.0.1:8000 ---"
+	$(UV) run uvicorn mlops.api:app --host 0.0.0.0 --port 8000 --reload
+
+# 9. UI Streamlit pour tester l'API (Mission 4)
+ui:
+	@echo "--- Démarrage de l'UI Streamlit sur http://127.0.0.1:8501 ---"
+	$(UV) run streamlit run src/mlops/streamlit_app.py
 
 # Nettoyage complet
 clean:
