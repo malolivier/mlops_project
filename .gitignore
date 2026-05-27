@@ -70,6 +70,7 @@ models/*
 # --- MLflow / DVC ---
 mlruns/
 mlartifacts/
+mlflow.db
 .mlflow/
 .dvc/cache
 .dvc/tmp

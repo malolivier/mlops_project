@@ -8,6 +8,9 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+# Tracking store relatif au CWD (= racine projet via `make train`), portable entre collaborateurs.
+mlflow.set_tracking_uri("sqlite:///mlflow.db")
+
 def load_data_from_duckdb(db_path="data/processed/housing.duckdb"):
     """Charge les données préparées depuis la base DuckDB."""
     # Connexion à DuckDB (en mode lecture seule pour éviter les verrous)
