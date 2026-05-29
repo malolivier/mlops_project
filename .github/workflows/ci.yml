@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    name: Tests unitaires
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          python-version: "3.10"
+
+      - name: Sync dependencies
+        run: uv sync --frozen
+
+      - name: Run pytest
+        run: uv run pytest tests/ -v
+
+  drift:
+    name: Rapport de drift Evidently
+    runs-on: ubuntu-latest
+    needs: test
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          python-version: "3.10"
+
+      - name: Sync dependencies
+        run: uv sync --frozen
+
+      - name: Prepare reference data
+        run: uv run python -m mlops.prepare
+
+      - name: Simulate production data
+        run: uv run python -m mlops.simulate_production
+
+      - name: Generate drift report
+        run: uv run python -m mlops.monitor
+
+      - name: Upload drift report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift-report
+          path: reports/drift_report.html
+          retention-days: 30

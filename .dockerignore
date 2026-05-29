@@ -1,0 +1,42 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.coverage
+
+# Virtual envs (rebuild inside container)
+.venv
+venv
+
+# Notebooks (pas nécessaires pour servir l'API)
+notebooks
+*.ipynb_checkpoints
+
+# Tests
+tests
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+*.swp
+
+# Claude
+.claude
+CLAUDE.md*
+
+# Données et modèles : montés via volumes
+data
+models
+mlruns
+mlflow.db
+mlartifacts
+
+# Docker meta (pas besoin dans l'image)
+Dockerfile
+.dockerignore

@@ -47,6 +47,7 @@ data/raw/*
 data/processed/*
 data/interim/*
 data/external/*
+data/production/*
 !data/**/.gitkeep
 *.csv
 *.tsv
@@ -70,6 +71,7 @@ models/*
 # --- MLflow / DVC ---
 mlruns/
 mlartifacts/
+mlflow.db
 .mlflow/
 .dvc/cache
 .dvc/tmp
@@ -77,6 +79,9 @@ mlartifacts/
 # --- Logs ---
 *.log
 logs/
+
+# --- Rapports générés (Evidently, etc.) ---
+reports/
 
 # --- IDE / Editeurs ---
 .vscode/
