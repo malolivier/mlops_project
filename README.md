@@ -216,6 +216,8 @@ Le modèle est chargé au démarrage depuis le MLflow Registry (`ImmoPrix_rf/lat
 
 ### UI Streamlit
 
+Une fois **l'API lancée**, dans un second terminal à la racine du projet
+
 ```bash
 make ui              # http://localhost:8501
 ```
