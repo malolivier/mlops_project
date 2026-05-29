@@ -173,7 +173,7 @@ make mlflow-ui       # http://localhost:5000
 
 ## Mission 3 — Analyse des features (SHAP)
 
-**Livrable** : `src/mlops/explain.py` + `notebooks/rapport.ipynb`.
+**Livrable** : Graphique global (Summary Plot) et graphique local (Waterfall Plot) (voir Mlflow -> SHAP_Explicability -> Artifacts)
 
 ```bash
 make explain
