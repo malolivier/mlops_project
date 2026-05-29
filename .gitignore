@@ -47,6 +47,7 @@ data/raw/*
 data/processed/*
 data/interim/*
 data/external/*
+data/production/*
 !data/**/.gitkeep
 *.csv
 *.tsv
@@ -78,6 +79,9 @@ mlflow.db
 # --- Logs ---
 *.log
 logs/
+
+# --- Rapports générés (Evidently, etc.) ---
+reports/
 
 # --- IDE / Editeurs ---
 .vscode/
