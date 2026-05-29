@@ -2,7 +2,7 @@
 UV = uv
 MLFLOW_DB = mlflow.db
 
-.PHONY: install format lint test prepare train mlflow-ui api ui all clean
+.PHONY: install format lint test prepare train explain mlflow-ui mlflow-serve api ui all clean
 
 # 1. Installation et synchronisation des dépendances
 install:
@@ -54,6 +54,14 @@ api:
 ui:
 	@echo "--- Démarrage de l'UI Streamlit sur http://127.0.0.1:8501 ---"
 	$(UV) run streamlit run src/mlops/streamlit_app.py
+
+# 10. Serving natif du modèle via MLflow (Mission 5)
+mlflow-serve:
+	@echo "--- Serving MLflow natif sur http://127.0.0.1:5001 (modèle ImmoPrix_rf) ---"
+	MLFLOW_TRACKING_URI=sqlite:///$(MLFLOW_DB) $(UV) run mlflow models serve \
+		-m "models:/ImmoPrix_rf/latest" \
+		--port 5001 \
+		--env-manager local
 
 # Nettoyage complet
 clean:
