@@ -2,7 +2,7 @@
 UV = uv
 MLFLOW_DB = mlflow.db
 
-.PHONY: install format lint test prepare train explain mlflow-ui mlflow-serve api ui all clean
+.PHONY: install format lint test prepare train explain mlflow-ui mlflow-serve api ui simulate-prod monitor all clean
 
 # 1. Installation et synchronisation des dépendances
 install:
@@ -62,6 +62,16 @@ mlflow-serve:
 		-m "models:/ImmoPrix_rf/latest" \
 		--port 5001 \
 		--env-manager local
+
+# 11. Simulation de données de production (Mission 6)
+simulate-prod:
+	@echo "--- Simulation de données de production ---"
+	$(UV) run python -m mlops.simulate_production
+
+# 12. Monitoring de data drift via Evidently (Mission 6)
+monitor: simulate-prod
+	@echo "--- Détection de drift et génération du rapport HTML ---"
+	$(UV) run python -m mlops.monitor
 
 # Nettoyage complet
 clean:
